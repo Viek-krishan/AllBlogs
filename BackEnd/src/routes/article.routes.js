@@ -12,7 +12,8 @@ import { upload } from "../middlewares/multer.middleware.js";
 const router = Router();
 router.use(VerifyUser); // Apply VerifyUser middleware to all routes in this file
 
-router.route("/").get(getAllArticle).post(publishArticle); 
+router.route("/").post(publishArticle);
+router.route("/get-all-article").get(getAllArticle);
 
 router
   .route("/:articleId")

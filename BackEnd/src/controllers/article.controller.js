@@ -7,18 +7,20 @@ import asyncHandler from "../utils/asyncHandler.js";
 import { UploadFileToCloudinary } from "../utils/Cloudinary.js";
 
 const getAllArticle = asyncHandler(async (req, res) => {
-  const { userId } = req.query;
+  // const { userId } = req.query;
 
-  // console.log(req);
-  if (!userId) throw new ApiError(401, "User id not found");
+  // console.log(req.query);
+  // if (!userId) throw new ApiError(401, "User id not found");
 
-  const user = await User.findById(userId);
+  // const user = await User.findById(userId);
 
-  if (!user) throw new ApiError(404, "User not found ! Invalid user id");
+  // if (!user) throw new ApiError(404, "User not found ! Invalid user id");
 
-  const allArticle = await Article.find({
-    owner: userId,
-  });
+  const allArticle = await Article.find();
+
+  if (!allArticle) {
+    throw new ApiError(201, "Article not found");
+  }
 
   res.status(201).json(new ApiResponse(201, allArticle, "Got it"));
 });
@@ -26,7 +28,6 @@ const getAllArticle = asyncHandler(async (req, res) => {
 const publishArticle = asyncHandler(async (req, res) => {
   const { title, summery, description } = req.body;
 
- 
   if (!title || !summery || !description)
     throw new ApiError(401, "All details are required");
 

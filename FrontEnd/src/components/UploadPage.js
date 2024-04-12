@@ -72,27 +72,6 @@ const UploadPage = () => {
     }
   };
 
-  const Register = async () => {
-    try {
-      // const formdata = await createFormData(user, avatar);
-
-      const requestOptions = {
-        method: "POST",
-        body: JSON.stringify(user),
-        redirect: "follow",
-      };
-
-      console.log(requestOptions);
-
-      fetch("http://localhost:3000/api/v1/user/register", requestOptions)
-        .then((response) => response.json())
-        .then((result) => console.log(result))
-        .catch((error) => console.error(error));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="h-screen bg-redBg text-white">
       {/* <Header/> */}

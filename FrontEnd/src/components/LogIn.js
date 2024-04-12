@@ -71,7 +71,7 @@ const LogIn = () => {
       localStorage.setItem("RefreshToken", response.data.data.RefreshToken);
 
       // // Verify storage using the correct property names
-      // console.log(localStorage.getItem("AccessToken"));
+      console.log(localStorage.getItem("AccessToken"));
 
       // Storing data inside store
       Dispatch(removeUser());
