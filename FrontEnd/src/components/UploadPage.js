@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import Header from "./Header";
+import { alertSuccess, alertError } from "../utils/Alert";
 
 const UploadPage = () => {
   const [article, setArticle] = useState({
@@ -23,98 +24,51 @@ const UploadPage = () => {
     console.log(thumbnail);
   };
 
-  // const UploadArticle = () => {
-  //   try {
-  //     // const formdata = await createFormData(user, avatar);
-
-  //     const requestOptions = {
-  //       method: "POST",
-  //       body: JSON.stringify(article),
-  //       redirect: "follow",
-  //     };
-
-  //     console.log(requestOptions);
-
-  //     fetch("http://localhost:3000/api/v1/article/", requestOptions)
-  //       .then((response) => response.json())
-  //       .then((result) => console.log(result))
-  //       .catch((error) => console.error(error));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const UploadArticle = async () => {
-  //   try {
-  //     const formData = new FormData();
-
-  //     // Add article data as JSON
-  //     formData.append("article", JSON.stringify(article));
-
-  //     // Handle image upload (assuming 'image' is a file object)
-  //     if (thumbnail) {
-  //       const imageFilename = thumbnail.name || "image.jpg"; // Default filename if not provided
-  //       formData.append("image", thumbnail, imageFilename);
-  //     }
-
-  //     const response = await axios.post(
-  //       "http://localhost:3000/api/v1/article/",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-
-  //     if (!response.data.success) {
-  //       // Assuming success property in response
-  //       throw new Error(response.data.message || "Upload failed");
-  //     }
-
-  //     console.log("Article and image upload successful:", response.data);
-  //   } catch (error) {
-  //     console.error("Error uploading article and image:", error);
-  //   }
-  // };
-
   const UploadArticle = async () => {
     try {
       // Handle image upload (assuming 'image' is a file object)
-      if (thumbnail) {
-        const imageFilename = thumbnail.name || "image.jpg"; // Default filename if not provided
-        formData.append("image", thumbnail, imageFilename);
-      }
+      // const formData = new FormData();
+      // if (thumbnail) {
+      //   const imageFilename = thumbnail.name || "image.jpg";
+      //   formData.append("image", thumbnail, imageFilename);
+      // }
 
-      console.log(localStorage.getItem("AccessToken"));
-      const requestOptions = {
-        method: "POST",
-        mode: "no-cors",
-        credentials: "include",
-        body: JSON.stringify(article),
-        headers: {
-          "Content-Type": "application/json", // Set appropriate Content-Type
-          // "Access-Control-Allow-Credentials": "true",
-        },
-        cookies: {
-          accessToken: localStorage.getItem("AccessToken"), // Set access token in cookie header (optional)
-        },
-        redirect: "follow", // Handle redirects if needed
+      // AccessToken retrieval and potential security improvement
+      const AccessToken = localStorage.getItem("AccessToken");
+
+      // Prepare article data object
+      const articleData = {
+        title: article.title, // Assuming 'article' is your state object
+        summery: article.summery,
+        description: article.description,
       };
 
-      const response = await fetch(
+      // Axios request with headers (including Authorization)
+      const response = await axios.post(
         "http://localhost:3000/api/v1/article/",
-        requestOptions
+        articleData,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+            "Content-Type": "application/json", // For JSON content
+          },
+        }
       );
 
-      if (!response.ok) {
+      if (response.status !== 201) {
+        // Check for successful status code
         throw new Error(`Upload failed with status ${response.status}`);
       }
 
-      const result = await response.json();
+      const result = response.data;
       console.log("Article and image upload successful:", result);
+      alertSuccess(result.message);
     } catch (error) {
       console.error("Error uploading article and image:", error);
+      if (error.response) {
+        console.error("Backend error:", error.response.data);
+        alertError(error.response.data.message);
+      }
     }
   };
 

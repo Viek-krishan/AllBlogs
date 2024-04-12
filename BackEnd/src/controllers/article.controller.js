@@ -26,9 +26,9 @@ const getAllArticle = asyncHandler(async (req, res) => {
 const publishArticle = asyncHandler(async (req, res) => {
   const { title, summery, description } = req.body;
 
-  console.log(req);
+ 
   if (!title || !summery || !description)
-    throw new ApiError(201, "All details are required");
+    throw new ApiError(401, "All details are required");
 
   const thumbnailLocalPath = req.file?.path;
 
