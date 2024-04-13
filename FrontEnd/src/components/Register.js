@@ -1,5 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
-// import { images } from "../utils/image";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Register = () => {

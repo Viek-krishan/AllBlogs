@@ -11,7 +11,6 @@ const Header = () => {
       <section className="Logo p-5 mx-5">
         <div>
           <Link to={`/`}>
-            {/* <img src="#" alt="Logo" /> */}
             <h1 className="text-3xl font-bold ">All Blog</h1>
           </Link>
         </div>
@@ -114,22 +113,6 @@ const Header = () => {
           </Link>
         </section>
       )}
-
-      {/* <section className="LogIn flex relative left-80">
-        <Link
-          to={`/authentication`}
-          className="bg-red-600/30 mx-2 px-2 py-1 rounded-lg text-sm  border-b-2 border-l-2 border-white/30 hover:scale-105 transition duration-200 ease-in-out"
-        >
-          Login
-        </Link>
-        <h5 className="cursor-default text-xl">/</h5>
-        <Link
-          to={`/authentication`}
-          className="bg-red-600/30 mx-2 px-2 py-1 rounded-lg text-sm border-b-2 border-l-2 border-white/30  hover:scale-105 transition duration-200 ease-in-out"
-        >
-          Register
-        </Link>
-      </section> */}
     </div>
   );
 };

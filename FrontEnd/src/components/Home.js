@@ -73,15 +73,6 @@ const Home = () => {
           </h3>
         </section>
         <div className="AllArticles w-full flex flex-wrap justify-center ">
-          {/* { <ArticleCard
-            size="large"
-            Description={{
-              title: "Relation Between US and China",
-              summary:
-                "The relation between the US and China is getting worse day by day. US has warned China for it's activity around south China sea.....",
-            }}
-          />
-          } */}
           {allArticles.map((article, index) => {
             return index === 2 || index === 3 ? (
               <ArticleCard

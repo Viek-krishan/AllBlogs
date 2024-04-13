@@ -23,36 +23,6 @@ const LogIn = () => {
     // console.log(user);
   };
 
-  // const LogInFn = async () => {
-  //   let data = JSON.stringify(user);
-  //   let url = "http://localhost:3000/api/v1/user/login";
-
-  //   let config = {
-  //     method: "post",
-  //     maxBodyLength: Infinity,
-  //     // url: "http://localhost:3000/api/v1/user/login",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     // data: data,
-  //   };
-
-  //   await axios
-  //     .post(url, data, config)
-  //     .then((response) => {
-  //       alertInfo(response.data.message);
-
-  //       localStorage.setItem("AccessToken", response.data.data.AccessToken);
-  //       localStorage.setItem("RefreshToken", response.data.data.RefreshToken);
-  //       const refreshTK = localStorage.getItem("RefRefreshToken");
-  //       console.log(localStorage.getItem("RefRefreshToken"));
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alertError(error.message);
-  //     });
-  // };
-
   const LogInFn = async () => {
     try {
       const data = JSON.stringify(user);

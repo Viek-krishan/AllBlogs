@@ -38,7 +38,7 @@ const UploadPage = () => {
 
       // Prepare article data object
       const articleData = {
-        title: article.title, // Assuming 'article' is your state object
+        title: article.title, 
         summery: article.summery,
         description: article.description,
       };
@@ -74,7 +74,6 @@ const UploadPage = () => {
 
   return (
     <div className="h-screen bg-redBg text-white">
-      {/* <Header/> */}
       <h1 className="text-3xl text-center font-serif p-7 ">
         Upload Your Article
       </h1>
